@@ -123,6 +123,10 @@ def vector_tan(v):
     """Apply the tangent function to each component of vector v."""
     return [math.tan(v[i]) for i in range(len(v))]
 
+import math
+
+# Define all vector operations here...
+
 def print_vector(v):
     """Print the vector in a readable format."""
     print("[", end="")
@@ -135,187 +139,203 @@ def print_vector(v):
 
 def main():
     print("Vector Math Calculator")
-    print("Available Operations:")
-    print("1. Vector Addition")
-    print("2. Vector Subtraction")
-    print("3. Scalar Multiplication")
-    print("4. Dot Product")
-    print("5. Cross Product (for 3-dimensional vectors)")
-    print("6. Vector Projection")
-    print("7. Vector Reflection")
-    print("8. Vector Refraction")
-    print("9. Face Forward")
-    print("10. Vector Scaling")
-    print("11. Vector Distance")
-    print("12. Vector Length (Magnitude)")
-    print("13. Vector Absolute Value")
-    print("14. Vector Minimum")
-    print("15. Vector Maximum")
-    print("16. Vector Floor")
-    print("17. Vector Ceiling")
-    print("18. Vector Snap")
-    print("19. Vector Wrap")
-    print("20. Vector Sine")
-    print("21. Vector Cosine")
-    print("22. Vector Tangent")
-    print()
+    while True:
+        print("\nAvailable Operations:")
+        print("1. Vector Addition")
+        print("2. Vector Subtraction")
+        print("3. Scalar Multiplication")
+        print("4. Dot Product")
+        print("5. Cross Product (for 3-dimensional vectors)")
+        print("6. Vector Projection")
+        print("7. Vector Reflection")
+        print("8. Vector Refraction")
+        print("9. Face Forward")
+        print("10. Vector Scaling")
+        print("11. Vector Distance")
+        print("12. Vector Length (Magnitude)")
+        print("13. Vector Absolute Value")
+        print("14. Vector Minimum")
+        print("15. Vector Maximum")
+        print("16. Vector Floor")
+        print("17. Vector Ceiling")
+        print("18. Vector Snap")
+        print("19. Vector Wrap")
+        print("20. Vector Sine")
+        print("21. Vector Cosine")
+        print("22. Vector Tangent")
+        print("0. Exit")
+        print()
 
-    try:
-        choice = int(input("Enter operation choice (1-22): "))
-        if choice < 1 or choice > 22:
-            raise ValueError("Invalid choice. Please enter a number between 1 and 22.")
+        try:
+            choice = int(input("Enter operation choice (0-22): "))
+            if choice == 0:
+                print("Exiting...")
+                break
+            elif choice < 1 or choice > 22:
+                raise ValueError("Invalid choice. Please enter a number between 0 and 22.")
 
-        if choice in [1, 2]:
-            v1 = list(map(float, input("Enter vector 1 (comma-separated values): ").split(",")))
-            v2 = list(map(float, input("Enter vector 2 (comma-separated values): ").split(",")))
+            if choice in [1, 2]:
+                v1 = list(map(float, input("Enter vector 1 (comma-separated values): ").split(",")))
+                v2 = list(map(float, input("Enter vector 2 (comma-separated values): ").split(",")))
 
-            if choice == 1:
-                result = vector_addition(v1, v2)
-                print("Result of Vector Addition:")
+                if choice == 1:
+                    result = vector_addition(v1, v2)
+                    print("Result of Vector Addition:")
+                    print_vector(result)
+                elif choice == 2:
+                    result = vector_subtraction(v1, v2)
+                    print("Result of Vector Subtraction:")
+                    print_vector(result)
+
+            elif choice == 3:
+                v = list(map(float, input("Enter vector (comma-separated values): ").split(",")))
+                scalar = float(input("Enter scalar value: "))
+                result = scalar_multiplication(v, scalar)
+                print("Result of Scalar Multiplication:")
                 print_vector(result)
-            elif choice == 2:
-                result = vector_subtraction(v1, v2)
-                print("Result of Vector Subtraction:")
+
+            elif choice == 4:
+                v1 = list(map(float, input("Enter vector 1 (comma-separated values): ").split(",")))
+                v2 = list(map(float, input("Enter vector 2 (comma-separated values): ").split(",")))
+                result = dot_product(v1, v2)
+                print("Result of Dot Product:")
+                print(result)
+
+            elif choice == 5:
+                v1 = list(map(float, input("Enter vector 1 (3-dimensional, comma-separated values): ").split(",")))
+                v2 = list(map(float, input("Enter vector 2 (3-dimensional, comma-separated values): ").split(",")))
+                result = cross_product(v1, v2)
+                print("Result of Cross Product:")
                 print_vector(result)
 
-        elif choice == 3:
-            v = list(map(float, input("Enter vector (comma-separated values): ").split(",")))
-            scalar = float(input("Enter scalar value: "))
-            result = scalar_multiplication(v, scalar)
-            print("Result of Scalar Multiplication:")
-            print_vector(result)
+            elif choice == 6:
+                v1 = list(map(float, input("Enter vector 1 (comma-separated values): ").split(",")))
+                v2 = list(map(float, input("Enter vector 2 (comma-separated values): ").split(",")))
+                result = vector_projection(v1, v2)
+                print("Result of Vector Projection:")
+                print_vector(result)
 
-        elif choice == 4:
-            v1 = list(map(float, input("Enter vector 1 (comma-separated values): ").split(",")))
-            v2 = list(map(float, input("Enter vector 2 (comma-separated values): ").split(",")))
-            result = dot_product(v1, v2)
-            print("Result of Dot Product:")
-            print(result)
+            elif choice == 7:
+                v = list(map(float, input("Enter vector (comma-separated values): ").split(",")))
+                normal = list(map(float, input("Enter normal vector (comma-separated values): ").split(",")))
+                result = vector_reflection(v, normal)
+                print("Result of Vector Reflection:")
+                print_vector(result)
 
-        elif choice == 5:
-            v1 = list(map(float, input("Enter vector 1 (3-dimensional, comma-separated values): ").split(",")))
-            v2 = list(map(float, input("Enter vector 2 (3-dimensional, comma-separated values): ").split(",")))
-            result = cross_product(v1, v2)
-            print("Result of Cross Product:")
-            print_vector(result)
+            elif choice == 8:
+                v = list(map(float, input("Enter incident vector (comma-separated values): ").split(",")))
+                normal = list(map(float, input("Enter normal vector (comma-separated values): ").split(",")))
+                eta = float(input("Enter index of refraction (eta): "))
+                result = vector_refraction(v, normal, eta)
+                print("Result of Vector Refraction:")
+                print_vector(result)
 
-        elif choice == 6:
-            v1 = list(map(float, input("Enter vector 1 (comma-separated values): ").split(",")))
-            v2 = list(map(float, input("Enter vector 2 (comma-separated values): ").split(",")))
-            result = vector_projection(v1, v2)
-            print("Result of Vector Projection:")
-            print_vector(result)
+            elif choice == 9:
+                n = list(map(float, input("Enter normal vector (comma-separated values): ").split(",")))
+                i = list(map(float, input("Enter incident vector (comma-separated values): ").split(",")))
+                ng = list(map(float, input("Enter normalized normal vector (comma-separated values): ").split(",")))
+                result = vector_face_forward(n, i, ng)
+                print("Result of Face Forward Operation:")
+                print_vector(result)
 
-        elif choice == 7:
-            v = list(map(float, input("Enter vector (comma-separated values): ").split(",")))
-            normal = list(map(float, input("Enter normal vector (comma-separated values): ").split(",")))
-            result = vector_reflection(v, normal)
-            print("Result of Vector Reflection:")
-            print_vector(result)
+            elif choice == 10:
+                v = list(map(float, input("Enter vector (comma-separated values): ").split(",")))
+                s = float(input("Enter scaling factor: "))
+                result = vector_scale(v, s)
+                print("Result of Vector Scaling:")
+                print_vector(result)
 
-        elif choice == 8:
-            v = list(map(float, input("Enter incident vector (comma-separated values): ").split(",")))
-            normal = list(map(float, input("Enter normal vector (comma-separated values): ").split(",")))
-            eta = float(input("Enter index of refraction (eta): "))
-            result = vector_refraction(v, normal, eta)
-            print("Result of Vector Refraction:")
-            print_vector(result)
+            elif choice == 11:
+                v1 = list(map(float, input("Enter vector 1 (comma-separated values): ").split(",")))
+                v2 = list(map(float, input("Enter vector 2 (comma-separated values): ").split(",")))
+                result = vector_distance(v1, v2)
+                print("Distance between Vector 1 and Vector 2:")
+                print(result)
 
-        elif choice == 9:
-            n = list(map(float, input("Enter normal vector (comma-separated values): ").split(",")))
-            i = list(map(float, input("Enter incident vector (comma-separated values): ").split(",")))
-            ng = list(map(float, input("Enter normalized normal vector (comma-separated values): ").split(",")))
-            result = vector_face_forward(n, i, ng)
-            print("Result of Face Forward Operation:")
-            print_vector(result)
+            elif choice == 12:
+                v = list(map(float, input("Enter vector (comma-separated values): ").split(",")))
+                result = vector_length(v)
+                print("Length (Magnitude) of the Vector:")
+                print(result)
 
-        elif choice == 10:
-            v = list(map(float, input("Enter vector (comma-separated values): ").split(",")))
-            s = float(input("Enter scaling factor: "))
-            result = vector_scale(v, s)
-            print("Result of Vector Scaling:")
-            print_vector(result)
+            elif choice == 13:
+                v = list(map(float, input("Enter vector (comma-separated values): ").split(",")))
+                result = vector_absolute(v)
+                print("Absolute Value (Magnitude) of the Vector:")
+                print_vector(result)
 
-        elif choice == 11:
-            v1 = list(map(float, input("Enter vector 1 (comma-separated values): ").split(",")))
-            v2 = list(map(float, input("Enter vector 2 (comma-separated values): ").split(",")))
-            result = vector_distance(v1, v2)
-            print("Distance between Vector 1 and Vector 2:")
-            print(result)
+            elif choice == 14:
+                v1 = list(map(float, input("Enter vector 1 (comma-separated values): ").split(",")))
+                v2 = list(map(float, input("Enter vector 2 (comma-separated values): ").split(",")))
+                result = vector_minimum(v1, v2)
+                print("Component-wise Minimum of Vector 1 and Vector 2:")
+                print_vector(result)
 
-        elif choice == 12:
-            v = list(map(float, input("Enter vector (comma-separated values): ").split(",")))
-            result = vector_length(v)
-            print("Length (Magnitude) of the Vector:")
-            print(result)
+            elif choice == 15:
+                v1 = list(map(float, input("Enter vector 1 (comma-separated values): ").split(",")))
+                v2 = list(map(float, input("Enter vector 2 (comma-separated values): ").split(",")))
+                result = vector_maximum(v1, v2)
+                print("Component-wise Maximum of Vector 1 and Vector 2:")
+                print_vector(result)
 
-        elif choice == 13:
-            v = list(map(float, input("Enter vector (comma-separated values): ").split(",")))
-            result = vector_absolute(v)
-            print("Absolute Value (Magnitude) of the Vector:")
-            print_vector(result)
+            elif choice == 16:
+                v = list(map(float, input("Enter vector (comma-separated values): ").split(",")))
+                result = vector_floor(v)
+                print("Floor of each component of the Vector:")
+                print_vector(result)
 
-        elif choice == 14:
-            v1 = list(map(float, input("Enter vector 1 (comma-separated values): ").split(",")))
-            v2 = list(map(float, input("Enter vector 2 (comma-separated values): ").split(",")))
-            result = vector_minimum(v1, v2)
-            print("Component-wise Minimum of Vector 1 and Vector 2:")
-            print_vector(result)
+            elif choice == 17:
+                v = list(map(float, input("Enter vector (comma-separated values): ").split(",")))
+                result = vector_ceil(v)
+                print("Ceiling of each component of the Vector:")
+                print_vector(result)
 
-        elif choice == 15:
-            v1 = list(map(float, input("Enter vector 1 (comma-separated values): ").split(",")))
-            v2 = list(map(float, input("Enter vector 2 (comma-separated values): ").split(",")))
-            result = vector_maximum(v1, v2)
-            print("Component-wise Maximum of Vector 1 and Vector 2:")
-            print_vector(result)
+            elif choice == 18:
+                v = list(map(float, input("Enter vector (comma-separated values): ").split(",")))
+                increment = float(input("Enter increment value for snapping: "))
+                result = vector_snap(v, increment)
+                print(f"Vector Snapped to Nearest Multiple of {increment}:")
+                print_vector(result)
 
-        elif choice == 16:
-            v = list(map(float, input("Enter vector (comma-separated values): ").split(",")))
-            result = vector_floor(v)
-            print("Floor of each component of the Vector:")
-            print_vector(result)
+            elif choice == 19:
+                v = list(map(float, input("Enter vector (comma-separated values): ").split(",")))
+                min_values = list(map(float, input("Enter min values (comma-separated values): ").split(",")))
+                max_values = list(map(float, input("Enter max values (comma-separated values): ").split(",")))
+                result = vector_wrap(v, min_values, max_values)
+                print("Vector Wrapped between Min and Max Values:")
+                print_vector(result)
 
-        elif choice == 17:
-            v = list(map(float, input("Enter vector (comma-separated values): ").split(",")))
-            result = vector_ceil(v)
-            print("Ceiling of each component of the Vector:")
-            print_vector(result)
+            elif choice == 20:
+                v = list(map(float, input("Enter vector (comma-separated values): ").split(",")))
+                result = vector_sin(v)
+                print("Sine (sin) of each component of the Vector:")
+                print_vector(result)
 
-        elif choice == 18:
-            v = list(map(float, input("Enter vector (comma-separated values): ").split(",")))
-            increment = float(input("Enter increment value for snapping: "))
-            result = vector_snap(v, increment)
-            print(f"Vector Snapped to Nearest Multiple of {increment}:")
-            print_vector(result)
+            elif choice == 21:
+                v = list(map(float, input("Enter vector (comma-separated values): ").split(",")))
+                result = vector_cos(v)
+                print("Cosine (cos) of each component of the Vector:")
+                print_vector(result)
 
-        elif choice == 19:
-            v = list(map(float, input("Enter vector (comma-separated values): ").split(",")))
-            min_values = list(map(float, input("Enter min values (comma-separated values): ").split(",")))
-            max_values = list(map(float, input("Enter max values (comma-separated values): ").split(",")))
-            result = vector_wrap(v, min_values, max_values)
-            print("Vector Wrapped between Min and Max Values:")
-            print_vector(result)
+            elif choice == 22:
+                v = list(map(float, input("Enter vector (comma-separated values): ").split(",")))
+                result = vector_tan(v)
+                print("Tangent (tan) of each component of the Vector:")
+                print_vector(result)
 
-        elif choice == 20:
-            v = list(map(float, input("Enter vector (comma-separated values): ").split(",")))
-            result = vector_sin(v)
-            print("Sine (sin) of each component of the Vector:")
-            print_vector(result)
+        except ValueError as ve:
+            print(f"Error: {ve}")
 
-        elif choice == 21:
-            v = list(map(float, input("Enter vector (comma-separated values): ").split(",")))
-            result = vector_cos(v)
-            print("Cosine (cos) of each component of the Vector:")
-            print_vector(result)
+        except Exception as e:
+            print(f"Error: {e}")
 
-        elif choice == 22:
-            v = list(map(float, input("Enter vector (comma-separated values): ").split(",")))
-            result = vector_tan(v)
-            print("Tangent (tan) of each component of the Vector:")
-            print_vector(result)
-
-    except ValueError as ve:
-        print(f"Error: {ve}")
+        # Ask user if they want to perform another operation
+        try:
+            continue_choice = input("\nDo you want to perform another operation? (yes/no): ").strip().lower()
+            if continue_choice != 'yes':
+                break
+        except KeyboardInterrupt:
+            break
 
 if __name__ == "__main__":
     main()
